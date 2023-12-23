@@ -1,18 +1,6 @@
 import { useState } from "react";
-import { BasicForm } from "../BasicForm";
-
-export interface IProduct {
-  id: number;
-  description: string;
-  amount: number;
-  category: string;
-}
-
-export const categories = [
-  { id: "Groceries", value: "Groceries" },
-  { id: "Utilities", value: "Utilities" },
-  { id: "Entertainment", value: "Entertainment" },
-];
+import { BasicForm } from "../BasicForm/BasicForm";
+import { IProduct, categories } from "../../models/expenseTracker.models";
 
 export const ExpenseTracker = () => {
   const [products, setProducts] = useState<IProduct[]>([
