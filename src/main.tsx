@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BasicForm } from "./components/BasicForm/BasicForm";
+import { ExpenseTracker } from "./components/BasicForm/ExpenseTracker/ExpenseTracker";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BasicForm />
+    <ExpenseTracker />
   </React.StrictMode>
 );

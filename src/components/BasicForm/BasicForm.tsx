@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BasicFormType, validations } from "./validations";
+import { IProduct } from "./ExpenseTracker/ExpenseTracker";
 
 const categories = [
   { id: 1, value: "Groceries" },
@@ -8,7 +9,11 @@ const categories = [
   { id: 3, value: "Entertainment" },
 ];
 
-export const BasicForm = () => {
+export const BasicForm = ({
+  setProduct,
+}: {
+  setProduct: React.Dispatch<React.SetStateAction<IProduct[]>>;
+}) => {
   const {
     register,
     handleSubmit,
@@ -18,7 +23,17 @@ export const BasicForm = () => {
     resolver: zodResolver(validations),
   });
 
-  const onSubmit: SubmitHandler<BasicFormType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<BasicFormType> = (data) => {
+    setProduct((_) => [
+      ..._,
+      {
+        id: Date.now(),
+        amount: data.amount,
+        category: data.category,
+        description: data.description,
+      },
+    ]);
+  };
 
   return (
     <div>
