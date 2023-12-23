@@ -1,13 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BasicFormType, validations } from "./validations";
-import { IProduct } from "./ExpenseTracker/ExpenseTracker";
-
-const categories = [
-  { id: 1, value: "Groceries" },
-  { id: 2, value: "Utilities" },
-  { id: 3, value: "Entertainment" },
-];
+import { IProduct, categories } from "./ExpenseTracker/ExpenseTracker";
 
 export const BasicForm = ({
   setProduct,

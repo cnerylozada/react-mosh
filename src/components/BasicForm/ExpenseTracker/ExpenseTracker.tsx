@@ -8,13 +8,47 @@ export interface IProduct {
   category: string;
 }
 
+export const categories = [
+  { id: "Groceries", value: "Groceries" },
+  { id: "Utilities", value: "Utilities" },
+  { id: "Entertainment", value: "Entertainment" },
+];
+
 export const ExpenseTracker = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([
+    { id: 1, amount: 25, category: "Groceries", description: "P1" },
+    { id: 2, amount: 25, category: "Utilities", description: "P2" },
+    { id: 3, amount: 25, category: "Groceries", description: "P3" },
+    {
+      id: 4,
+      amount: 25,
+      category: "Entertainment",
+      description: "P4",
+    },
+  ]);
+  const [categorySelected, setCategorySelected] = useState("");
+
+  const onFilter = (_: IProduct) =>
+    categorySelected === "" ? true : _.category === categorySelected;
 
   return (
     <div>
       <BasicForm setProduct={setProducts} />
       <div>ExpenseTracker</div>
+      <div>
+        <select
+          onChange={(e) => {
+            setCategorySelected(e.target.value);
+          }}
+        >
+          <option value="">All</option>
+          {categories.map((_) => (
+            <option key={_.id} value={_.id}>
+              {_.value}
+            </option>
+          ))}
+        </select>
+      </div>
       <div>
         <table>
           <thead>
@@ -27,7 +61,7 @@ export const ExpenseTracker = () => {
             </tr>
           </thead>
           <tbody>
-            {products?.map((_) => {
+            {products?.filter(onFilter).map((_) => {
               return (
                 <tr key={_.id}>
                   <td>{_.id}</td>
@@ -50,7 +84,9 @@ export const ExpenseTracker = () => {
             })}
           </tbody>
         </table>
-        {!products?.length && <div>There is no products to show</div>}
+        <div>
+          {!products?.filter(onFilter).length && "There is no products to show"}
+        </div>
       </div>
     </div>
   );
