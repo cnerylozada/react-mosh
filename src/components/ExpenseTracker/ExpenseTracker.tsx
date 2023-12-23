@@ -3,17 +3,7 @@ import { BasicForm } from "../BasicForm/BasicForm";
 import { IProduct, categories } from "../../models/expenseTracker.models";
 
 export const ExpenseTracker = () => {
-  const [products, setProducts] = useState<IProduct[]>([
-    { id: 1, amount: 25, category: "Groceries", description: "P1" },
-    { id: 2, amount: 25, category: "Utilities", description: "P2" },
-    { id: 3, amount: 25, category: "Groceries", description: "P3" },
-    {
-      id: 4,
-      amount: 25,
-      category: "Entertainment",
-      description: "P4",
-    },
-  ]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [categorySelected, setCategorySelected] = useState("");
 
   const onFilter = (_: IProduct) =>
