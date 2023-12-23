@@ -15,6 +15,7 @@ export const ExpenseTracker = () => {
       <div>ExpenseTracker</div>
       <div>
         <select
+          data-testid="categorySelect"
           onChange={(e) => {
             setCategorySelected(e.target.value);
           }}
@@ -41,7 +42,7 @@ export const ExpenseTracker = () => {
           <tbody>
             {products?.filter(onFilter).map((_) => {
               return (
-                <tr key={_.id}>
+                <tr key={_.id} data-testid="product">
                   <td>{_.id}</td>
                   <td>{_.description}</td>
                   <td>{_.amount}</td>
@@ -62,7 +63,7 @@ export const ExpenseTracker = () => {
             })}
           </tbody>
         </table>
-        <div>
+        <div data-testid="noProductsMessage">
           {!products?.filter(onFilter).length && "There is no products to show"}
         </div>
       </div>

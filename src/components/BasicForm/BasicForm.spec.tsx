@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { BasicForm } from "./BasicForm";
-import { fillOuTBasicForm } from "../../utils/testing";
+import { fillOuTBasicForm, validBasicFormValues } from "../../utils/testing";
 
 describe("BasicForm component", () => {
   const mockSetProduct = vi.fn();
@@ -20,16 +20,19 @@ describe("BasicForm component", () => {
     const formTitle = screen.getByText(/basic form/i);
     expect(formTitle).toBeInTheDocument();
 
+    const values = validBasicFormValues[0];
     const { amountInput, categoryInput, descriptionInput } =
-      await fillOuTBasicForm(screen);
+      await fillOuTBasicForm(screen, values);
 
-    expect(descriptionInput).toHaveValue("Mock description");
-    expect(amountInput).toHaveValue(18);
-    expect(categoryInput).toHaveValue("Utilities");
+    expect(descriptionInput).toHaveValue(values.description);
+    expect(amountInput).toHaveValue(values.amount);
+    expect(categoryInput).toHaveValue(values.category);
   });
 
   it("should trigger submit event when submit button is clicked", async () => {
-    await fillOuTBasicForm(screen);
+    const values = validBasicFormValues[0];
+    await fillOuTBasicForm(screen, values);
+
     const submitButton = screen.getByRole("button", {
       name: /submit/i,
     });
